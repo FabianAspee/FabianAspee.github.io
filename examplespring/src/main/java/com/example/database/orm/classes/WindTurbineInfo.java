@@ -15,7 +15,6 @@ public class WindTurbineInfo {
     private String turbineName;
     private Boolean haveTorquer;
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public Long getId(){

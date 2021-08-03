@@ -1,18 +1,14 @@
 package com.example.database.connection;
 
-public class ConnectionDatabase {
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
-    private static class ConnectionSQLite{
-        static final ConnectionDatabase instance = new ConnectionDatabase();
+public abstract class ConnectionDatabase {
+    public Session getSession(){
+        return factory.openSession();
     }
-    private static class ConnectionMySQL{
-        static final ConnectionDatabase instance = new ConnectionDatabase();
-    }
-    private ConnectionDatabase(){}
-    public static ConnectionDatabase getInstanceDbSqlite(){
-        return ConnectionSQLite.instance;
-    }
-    public static ConnectionDatabase getInstanceDbMysql(){
-        return ConnectionMySQL.instance;
+    protected final SessionFactory factory;
+    protected ConnectionDatabase(SessionFactory factory){
+        this.factory = factory;
     }
 }
