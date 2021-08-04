@@ -30,16 +30,37 @@ public class ExamplespringApplication {
         return String.format("Hello %s", name);
     }
 
-    @GetMapping("/nameTurbine")
+    @GetMapping("/nameturbine")
     public String getWindTurbineById(@RequestParam(value="name",defaultValue="0")final Optional<String> id){
         return id.filter(x-> !x.equals("0") && Util.tryParseInt(x))
                 .map(x->String.format("Turbine Name %s", logic.readNameTurbine(Integer.parseInt(x))))
-                .orElseGet(()->"error value");
+                .orElse("error value");
     }
-    @GetMapping("/nameAllTurbine")
+    @GetMapping("/nameallturbine")
     public String getAllWindTurbine(){
         return  String.format("Turbine Names are %s", logic.readAllTurbine().map(x->
                         x.stream().map(WindTurbineInfo::getTurbineName).collect(Collectors.joining(",")))
+                .orElseGet(()->"Not found"));
+    }
+
+    @GetMapping("/tensionlineturbine")
+    public String getAllTensionLine(){
+        return  String.format("Tension Line Name are %s", logic.readAllTensionLine().map(x->
+                x.stream().map(WindTurbineInfo::getTensionLine).collect(Collectors.joining(",")))
+                .orElseGet(()->"Not found"));
+    }
+
+    @GetMapping("/turbinewithtorquer")
+    public String getAllTurbineWithTorquer(){
+        return  String.format("Turbine Names are %s", logic.readAllTurbine().map(x->
+                x.stream().map(WindTurbineInfo::getTurbineName).collect(Collectors.joining(",")))
+                .orElseGet(()->"Not found"));
+    }
+
+    @GetMapping("/turbinewithouttorquer")
+    public String getAllTurbineWithoutTorquer(){
+        return  String.format("Turbine Names are %s", logic.readAllTurbine().map(x->
+                x.stream().map(WindTurbineInfo::getTurbineName).collect(Collectors.joining(",")))
                 .orElseGet(()->"Not found"));
     }
 }

@@ -11,4 +11,6 @@ public interface Operation {
     String readNameTurbine(int idTurbine);
 
     Optional<List<WindTurbineInfo>> readAllTurbine();
+
+    Optional<List<WindTurbineInfo>> readAllTensionLine();
 }
