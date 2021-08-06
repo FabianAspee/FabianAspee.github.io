@@ -7,6 +7,8 @@ import { AppComponent } from './app.component';
 import { ButtonComponent } from './my-components/button.component';
 import { InputComponent } from './my-components/input.component';
 import { TextAreaComponent } from './my-components/textarea.component';
+import { MessageService } from './config/message.service';
+import { HttpErrorHandler } from './config/http-error-handler.service';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,7 @@ import { TextAreaComponent } from './my-components/textarea.component';
     AppRoutingModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [HttpErrorHandler,MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

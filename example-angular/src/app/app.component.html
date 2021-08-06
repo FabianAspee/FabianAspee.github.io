@@ -56,14 +56,20 @@
   </div> 
    
     <div class="form-group">
-      <custom-button [name]="rest_get_call" ></custom-button> 
+      <custom-button [name]="rest_get_call" (click_event)="turbineById()"></custom-button> 
     </div> 
     <custom-input [name]="place_holder_input"></custom-input>
     <div class="form-group">
-      <custom-button [name]="rest_get_call_list"></custom-button> 
-      <custom-button [name]="rest_post_call"></custom-button> 
-      <custom-button [name]="rest_post_call_list"></custom-button> 
-      <custom-button [name]="rabbit_call"></custom-button>
+      <custom-button [name]="rest_get_call_list" (click_event)="allTurbine()"></custom-button> 
+      <custom-button [name]="rest_get_call_list_tension" (click_event)="getAllTensionLine()"></custom-button> 
+      <custom-button [name]="rest_get_call_map_torque" (click_event)="getAllTurbineWithTorque()"></custom-button> 
+      <custom-button [name]="rest_get_call_set_torque" (click_event)="getAllTurbineWithoutTorque()"></custom-button> 
+      <custom-button [name]="rest_post_call" (click_event)="turbineByIdPostCall()"></custom-button> 
+      <custom-button [name]="rest_post_call_all" (click_event)="allTurbinePostCall()"></custom-button> 
+      <custom-button [name]="rest_post_call_insert" (click_event)="insertTurbinePost()"></custom-button> 
+      <custom-button [name]="rest_post_call_multiple_insert" (click_event)="insertMultipleTurbinePost()"></custom-button> 
+      <custom-button [name]="rabbit_call_id" (click_event)="connectionToRabbitTurbineById()"></custom-button>
+      <custom-button [name]="rabbit_call" (click_event)="connectionToRabbitAllTurbine()"></custom-button>
     </div>  
   <div class="container">
     <div class="text-center">

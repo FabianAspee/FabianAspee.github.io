@@ -1,0 +1,11 @@
+version: '3.4'
+
+services:
+  rabbitmq:
+    image: ${DOCKER_REGISTRY-}rabbitmq
+    ports:
+        - 5672:5672
+        - 15672:15672
+    build:
+      context: .
+      dockerfile: Dockerfile   
