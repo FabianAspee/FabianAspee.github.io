@@ -1,20 +1,23 @@
 import { Injectable, OnInit } from "@angular/core";
 import { Stomp } from "@stomp/stompjs";
 
+let myFunction : (x:string)=>string;
 @Injectable()
-export class Receiver implements OnInit{
-    ws = new WebSocket('ws://127.0.0.1:5672/ws');
+export class Receiver{
+    ws = new WebSocket('ws://localhost:15674/ws');
     client = Stomp.over(this.ws);  
     
-    on_connect = () => console.log('connected');
+    connect=(f:(input:string)=>string)=> { 
+        myFunction = f; 
+        this.client.connect('guest', 'guest', this.on_connect, this.on_error, '/'); 
+    } 
+
+    on_connect = () => this.client.subscribe("/queue/demo-rabbitmq", (d) =>
+         myFunction(d.body));
     
-    on_error =  () => console.log('error');
+    on_error =  (x:any) => console.log('error',x);
     
 
-    ngOnInit(){ 
-        console.log(1111)
-        this.client.connect('guest', 'guest', this.on_connect, this.on_error, '/demo-rabbitmq'); 
-        this.client.onreceive = x => console.log(x);
-    }
+    
 
 } 

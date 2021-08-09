@@ -16,7 +16,7 @@ export class AppComponent{
   editHero: string | undefined; // the hero currently being edited
 
   constructor(private configService: ConfigService,private receiver: Receiver) {
-    
+    receiver.connect(this.printValueRabbit)
   }
   title = 'example-angular';
   rest_get_call ="Turbine by Id GET";
@@ -91,10 +91,15 @@ export class AppComponent{
     this.configService.getConnectionToRabbitAllTurbine()
     .subscribe(allNameTurbine => console.log(allNameTurbine));
   }
+
+  printValueRabbit=(x:string):string=>this.place_holder_result+="\n " + x;
+
   setInsertTurbinePost(turbine?: WindTurbineInfo) {
     throw new Error('Method not implemented.');
   }
   setInsertMultipleTurbinePost() {
     throw new Error('Method not implemented.');
   }
+
+
 }
