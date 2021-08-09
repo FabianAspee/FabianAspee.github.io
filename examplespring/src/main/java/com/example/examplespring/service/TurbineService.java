@@ -107,13 +107,13 @@ public record TurbineService(Sender senderService) implements Turbine {
     }
 
     @Override
-    public List<Integer> insertMultipleTurbine(@RequestParam(value = "turbine", defaultValue = "null") final List<WindTurbineInfo> turbine) {
+    public List<Integer> insertMultipleTurbine(@RequestParam(value = "turbines", defaultValue = "null") final List<WindTurbineInfo> turbine) {
         return logic.executeFunction(UtilDatabase.insertMultipleTurbine.apply(turbine)).orElseGet(Collections::emptyList);
 
     }
 
     @Override
-    public void realTimeTurbineById(@RequestParam(value = "name", defaultValue = "0") final String id) {
+    public void realTimeTurbineById(@RequestParam(value = "id_turbine", defaultValue = "0") final String id) {
         senderService.sendViaDirectExchange(String.format("\"%s\"", Optional.of(id).filter(x -> !x.equals("0") && Util.tryParseInt(x))
                 .map(x -> String.format("Turbine Name %s", logic.executeFunction(
                         UtilDatabase.readNameTurbine.apply(Integer.valueOf(x))).orElse("Turbine not exist")))
@@ -121,7 +121,7 @@ public record TurbineService(Sender senderService) implements Turbine {
     }
 
     @Override
-    public void realTimeAllTurbine() {
+    public void realTimeAllTurbine() { 
         getWindAllTurbinePost().forEach(senderService::sendViaDirectExchange);
     }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpParams, HttpHeaders} from "@angular/common/http";
-import { Observable, throwError } from 'rxjs';
+import { HttpClient, HttpParams, HttpHeaders, HttpParamsOptions} from "@angular/common/http";
+import { Observable, throwError, of} from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { HttpErrorHandler, HandleError } from './http-error-handler.service';
 
@@ -16,7 +16,8 @@ export class ConfigService{
   tensionLineUrl = 'api/tensionlineturbine';  // URL to web api
   turbineWithTorquerUrl = 'api/turbinewithtorquer';
   turbinewithoutTorquerUrl = 'api/turbinewithouttorquer';  // URL to web api
-  turbineUrlCallRabbit  ='api/realtimerabbitturbinebyid'
+  turbineUrlCallRabbit  = 'api/realtimerabbitturbinebyid';
+  turbineUrlCallRabbitAll  = 'api/realtimeallturbine';
   private handleError: HandleError;
 
   constructor (private http: HttpClient,
@@ -24,6 +25,24 @@ export class ConfigService{
       this.handleError = httpErrorHandler.createHandleError('TurbineService');
     }
 
+  private getHttpOptions =(id:number)=> {
+    const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json'
+    }), 
+    params: new HttpParams().set('name', id)
+    };
+    return httpOptions;
+  };
+
+  private getHttpOptionsWithoutParam =()=> {
+    const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json'
+    })};
+    return httpOptions;
+  };
+  
   /** GET name turbine from the server */
   getNameTurbineById(id: number): Observable<string> {
       const options = { 
@@ -76,27 +95,17 @@ export class ConfigService{
   }
 
   /* GET heroes whose name contains search term */
-  getConnectionToRabbitTurbineById(id: number): void { 
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json'
-      }), 
-      params: new HttpParams().set('name', 2)
-    } 
-    this.http.post(this.url+this.turbineUrlCallRabbit,undefined,httpOptions)
-    .pipe(catchError(this.handleError('getAllTurbinePostCall')))
+  getConnectionToRabbitTurbineById(id: number): Observable<void> { 
+    const httpOptions = this.getHttpOptions(id);
+    return this.http.post<void>(this.url+this.turbineUrlCallRabbit,undefined,httpOptions)
+    .pipe(catchError(this.handleError<void>('getConnectionToRabbitTurbineById')));
   }
-
+  
   /* GET heroes whose name contains search term */
-  getConnectionToRabbitAllTurbine(): void { 
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json'
-      }), 
-      params: new HttpParams().set('name', 2)
-    } 
-    this.http.post(this.url+this.turbineUrlCallRabbit,undefined,httpOptions)
-    .pipe(catchError(this.handleError('getAllTurbinePostCall')))
+  getConnectionToRabbitAllTurbine(): Observable<void> { 
+    const httpOptions = this.getHttpOptionsWithoutParam()
+    return this.http.post<void>(this.url+this.turbineUrlCallRabbitAll,undefined,httpOptions)
+    .pipe(catchError(this.handleError<void>('getConnectionToRabbitAllTurbine')))
   }
 
 

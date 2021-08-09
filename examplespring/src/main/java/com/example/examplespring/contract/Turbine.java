@@ -44,11 +44,11 @@ public interface Turbine {
     int insertTurbine(@RequestParam(value = "turbine", defaultValue = "null") final WindTurbineInfo turbine);
 
     @PostMapping("/api/insertmultipleturbine")
-    List<Integer> insertMultipleTurbine(@RequestParam(value = "turbine", defaultValue = "null")
+    List<Integer> insertMultipleTurbine(@RequestParam(value = "turbines", defaultValue = "null")
                               final List<WindTurbineInfo> turbine);
 
     @PostMapping("/api/realtimerabbitturbinebyid")
-    void realTimeTurbineById(@RequestParam(value = "name", defaultValue = "0") final String id);
+    void realTimeTurbineById(@RequestParam(value = "id_turbine", defaultValue = "0") final String id);
 
     @PostMapping("/api/realtimeallturbine")
     void realTimeAllTurbine();

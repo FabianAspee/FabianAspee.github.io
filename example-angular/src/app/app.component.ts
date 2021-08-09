@@ -83,11 +83,13 @@ export class AppComponent{
   }
   
   getConnectionToRabbitTurbineById(id:number): void { 
-    this.configService.getConnectionToRabbitTurbineById(id);
+    this.configService.getConnectionToRabbitTurbineById(id)
+    .subscribe(allNameTurbine => console.log(allNameTurbine));
   }
 
   getConnectionToRabbitAllTurbine(): void { 
-    this.configService.getConnectionToRabbitAllTurbine();
+    this.configService.getConnectionToRabbitAllTurbine()
+    .subscribe(allNameTurbine => console.log(allNameTurbine));
   }
   setInsertTurbinePost(turbine?: WindTurbineInfo) {
     throw new Error('Method not implemented.');
