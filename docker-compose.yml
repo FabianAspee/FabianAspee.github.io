@@ -9,4 +9,20 @@ services:
         - 15674:15674
     build:
       context: .
-      dockerfile: Dockerfile   
+      dockerfile: Dockerfile  
+
+  frontend_angular:
+    image: ${DOCKER_REGISTRY-}frontend_angular
+    ports:
+        - 4200:80
+    build:
+      context: .
+      dockerfile: example-angular-with-routing/Dockerfile   
+  
+  backend_spring:
+    image: ${DOCKER_REGISTRY-}backend_spring
+    ports:
+        - 8080:8080
+    build:
+      context: .
+      dockerfile: examplespring/Dockerfile   

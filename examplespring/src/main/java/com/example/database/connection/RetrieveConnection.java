@@ -1,7 +1,6 @@
 package com.example.database.connection;
 
 import com.example.database.operation.contract.Operation;
-import com.example.database.operation.service.CommonClass;
 import com.example.database.operation.service.SQLiteClass;
 
 public class RetrieveConnection {

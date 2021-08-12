@@ -3,16 +3,12 @@ package com.example.database.operation.service;
 import com.example.database.connection.ConnectionDatabase;
 import com.example.database.connection.RetrieveConnection;
 import com.example.database.operation.contract.Operation;
-import com.example.database.orm.classes.WindTurbineInfo;
-import org.checkerframework.checker.nullness.Opt;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.util.*;
 import java.util.function.Function;
-import java.util.function.Supplier;
-import java.util.stream.Collectors;
 
 public abstract class CommonClass implements Operation{
     protected ConnectionDatabase connectionDatabase = RetrieveConnection.getInstance();

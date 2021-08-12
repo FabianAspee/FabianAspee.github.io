@@ -1,8 +1,9 @@
 plugins {
     id 'org.springframework.boot' version '2.5.3'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-    id 'java'
+    id 'java-library'
 }
+
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
@@ -30,5 +31,11 @@ test {
     useJUnitPlatform()
 }
 
+tasks.named('jar') {
+    manifest {
+        attributes('Implementation-Title': project.name,
+                   'Implementation-Version': project.version)
+    }
+}
 
 targetCompatibility = JavaVersion.VERSION_16

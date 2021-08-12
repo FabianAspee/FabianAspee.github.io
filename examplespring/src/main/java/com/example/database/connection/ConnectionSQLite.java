@@ -1,7 +1,6 @@
 package com.example.database.connection;
 
 
-import org.hibernate.Session;
 import org.hibernate.cfg.Configuration;
 
 public class ConnectionSQLite extends ConnectionDatabase{
