@@ -9,7 +9,7 @@ services:
         - 15674:15674
     build:
       context: .
-      dockerfile: Dockerfile  
+      dockerfile: rabbitmq/Dockerfile  
 
   frontend_angular:
     image: ${DOCKER_REGISTRY-}frontend_angular
