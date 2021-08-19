@@ -9,7 +9,7 @@ public class ConnectionMySQL extends ConnectionDatabase{
     }
 
     private ConnectionMySQL(){
-        super(new Configuration().configure().buildSessionFactory());
+        super(new Configuration());
     }
 
     public static ConnectionDatabase getInstance() {
